@@ -21,11 +21,12 @@ const ChatDialog = ({ isOpen, onClose }: ChatDialogProps) => {
   const [messages, setMessages] = useState<Message[]>([
     {
       sender: 'ai',
-      text: "Hi there! 👋 I'm Sandeep's AI assistant. How can I help you today? You can ask me about Sandeep's skills, projects, or how to get in touch for collaboration.",
+      text: "👋 Hey there! I'm Sandy, Sandeep's digital sidekick! 🦸‍♂️✨ I'm here to chat about all things Sandeep - his amazing projects, ninja coding skills, or just to say hi! What would you like to know? 😊",
       time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
       actions: [
-        { type: 'navigate', target: 'projects', label: 'View Projects' },
-        { type: 'navigate', target: 'contact', label: 'Contact Info' }
+        { type: 'navigate', target: 'projects', label: '🚀 See Projects' },
+        { type: 'navigate', target: 'contact', label: '📱 Contact Info' },
+        { type: 'link', target: 'https://github.com/MrBanoth', label: '🌟 GitHub' }
       ]
     }
   ]);
@@ -102,7 +103,8 @@ const ChatDialog = ({ isOpen, onClose }: ChatDialogProps) => {
       // Try to use the Gemini API first
       try {
         const API_URL = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent';
-        const API_KEY = 'AIzaSyA0RqJK0IuhgF-rc4o7botCY4u3N0SnKCc';
+        // Use environment variable for API key security
+        const API_KEY = process.env.NEXT_PUBLIC_GEMINI_API_KEY || '';
         
         const response = await fetch(`${API_URL}?key=${API_KEY}`, {
           method: 'POST',
@@ -114,48 +116,55 @@ const ChatDialog = ({ isOpen, onClose }: ChatDialogProps) => {
               {
                 parts: [
                   {
-                    text: `You are Sandeep's AI assistant on his portfolio website. Respond briefly as if you are Sandeep Naik, a Frontend Developer and UI/UX Designer.
-                    
+                    text: `You are Sandy, Sandeep's super friendly AI assistant on his portfolio site! Your personality: upbeat, enthusiastic, cute, and helpful! Use emojis liberally to add personality. Keep responses short, fun, and engaging (max 3 sentences per paragraph). Use exclamation marks! Sound excited! Be playful but professional!
+
 About Sandeep:
-- Full Name: Banoth Sandeep Naik
-- Profession: Frontend Developer and UI/UX Designer (NOT a Full Stack Developer)
-- Education: B.Tech student in Computer Science and Engineering at IIIT Manipur
-- Location: Currently based in Hyderabad, India
-- Languages: Hindi, Telugu, and English
-- Status: Available for freelance work
+👨‍💻 Full Stack Developer & UI/UX Designer extraordinaire!
+🎓 B.Tech student in Computer Science and Engineering at IIIT Manipur
+📍 Based in Hyderabad, India
+🌍 Fluent in English, Hindi, Telugu
+💼 Actively freelancing - available for hire!
+📋 Experience: 2+ years building websites and web applications
 
-Technical Skills:
-- Frontend: React, TypeScript, Next.js, JavaScript, HTML5, CSS3
-- UI Frameworks: TailwindCSS, Material UI, Bootstrap
-- UI/UX Design: Figma, Adobe XD
-- Version Control: Git, GitHub
+Tech Skills (talk about these with excitement!):
+✨ Frontend: React, Next.js, TypeScript, JavaScript, HTML5, CSS3
+🎨 UI Frameworks: TailwindCSS, Material UI, Bootstrap, Styled Components
+📲 UI/UX Design: Figma, Adobe XD, responsive design principles
+🛠️ Other: Git, GitHub, VS Code, REST APIs, Firebase
 
-Projects (with detailed information):
-1. Anonymous Chatting app
-   - Description: A frontend chat application with Sara AI assistant integration
-   - Technologies: React, AI Integration, Tailwind CSS
-   - Live Demo: https://anon-chat-pi.vercel.app/
-   - Code: https://github.com/MrBanoth/Anon-Chat
+Amazing Projects (be enthusiastic about these!):
+🚀 Anonymous Chat - AI-powered chat app with privacy features!
+   Demo: anon-chat-pi.vercel.app
 
-2. PopcornTV
-   - Description: A Netflix-inspired streaming platform with movie browsing, trailers, and favorites list
-   - Technologies: Next.js, TypeScript, Tailwind CSS, TMDB API
-   - Live Demo: https://pop-corn-tv.vercel.app/browse
-   - Code: https://github.com/MrBanoth/Netflix-Clone
+🍿 PopcornTV - The coolest Netflix clone with trailers and favorites!
+   Demo: pop-corn-tv.vercel.app
 
-3. Pani.Mr - Actor Portfolio
-   - Description: A portfolio website for an actor showcasing their work and photos
-   - Technologies: React, Modern CSS
-   - Live Demo: https://1st-client-project.vercel.app/
-   - Code: https://github.com/MrBanoth/1st-client-project
+🎭 Pani.Mr - Beautiful actor portfolio with smooth animations!
+   Demo: 1st-client-project.vercel.app
 
-4. Shri Lakshmi Sai Insulation - Business Website
-   - Description: A business website showcasing services, portfolio, and contact information
-   - Technologies: React, Modern CSS
-   - Live Demo: https://https-github-com-mr-naik-011-shri-lakshmi-sai-insulation.vercel.app/
-   - Code: https://github.com/MrBanoth/shri-lakshmi-sai-insulation
+🏢 Shri Lakshmi Sai Insulation - Professional business website!
+   Demo: shri-lakshmi-sai-insulation.vercel.app
 
-Contact: sandeepnaikb0@gmail.com, WhatsApp: +91-9390730129
+📱 Contact: sandeepnaikb0@gmail.com | WhatsApp: +91-9390730129
+
+# Common Questions to Handle Well:
+- "What services does Sandeep offer?" → Web development, UI/UX design, responsive websites, web apps
+- "How much does Sandeep charge?" → Depends on project scope, contact for custom quote
+- "How long does a project take?" → Typically 2-4 weeks depending on complexity
+- "What is Sandeep's work process?" → Requirements gathering, design, development, testing, deployment
+- "What makes Sandeep different?" → Attention to detail, clean code, beautiful design, responsive communication
+- "What technologies does Sandeep use?" → React, Next.js, TypeScript, TailwindCSS, etc.
+- "Is Sandeep available for remote work?" → Yes, works with clients worldwide
+- "What kind of projects does Sandeep like?" → Challenging, creative projects with modern tech
+
+Response style guide:
+- For greetings: Be super friendly and welcoming!
+- For project questions: Express excitement about Sandeep's work!
+- For skill questions: Talk about Sandeep's abilities with admiration!
+- For contact questions: Be helpful and encouraging!
+- For personal questions: Be charming and positive!
+- For pricing/timeline questions: Be helpful but not specific (suggest contacting)
+- ALWAYS end with an offer to help more or a friendly sign-off!
 
 User question: ${prompt}`
                   }
@@ -270,57 +279,100 @@ User question: ${prompt}`
         // Fall back to predefined responses if API fails
       }
       
-      // Fallback responses if API call fails
+      // Use fallback data with cute, friendly responses
+      // Match common patterns to provide engaging answers
       const lowerPrompt = prompt.toLowerCase();
-      let text = '';
+      let text = "I'm not totally sure about that 🤔 but I'd love to tell you about Sandeep's amazing projects or coding skills! What would you like to know? ✨";
       const actions: { type: 'navigate' | 'link'; target: string; label: string; }[] = [];
       
-      // Handle common queries with predefined responses
-      if (lowerPrompt.includes('project') || lowerPrompt.includes('work') || lowerPrompt.includes('portfolio')) {
-        text = "I have several projects in my portfolio including an Anonymous Chatting app, PopcornTV streaming platform, Pani.Mr actor portfolio, and Shri Lakshmi Sai Insulation business website. You can check them out in my Projects section or click the button below to navigate there.";
-        actions.push({ type: 'navigate', target: 'projects', label: 'View Projects' });
+      if (lowerPrompt.includes('hi') || lowerPrompt.includes('hello') || lowerPrompt.includes('hey')) {
+        text = "Hey there! 👋 So happy you're chatting with me! How can I brighten your day? Want to see Sandeep's cool projects or learn about his awesome skills? 😊";
+        actions.push({ type: 'navigate', target: 'projects', label: '🚀 See Projects' });
       } 
-      else if (lowerPrompt.includes('contact') || lowerPrompt.includes('email') || lowerPrompt.includes('whatsapp') || lowerPrompt.includes('reach')) {
-        text = "You can reach me via email at sandeepnaikb0@gmail.com or WhatsApp at +91-9390730129. Feel free to use the Contact section of my portfolio or click the button below.";
-        actions.push({ type: 'navigate', target: 'contact', label: 'Contact Info' });
-      }
-      else if (lowerPrompt.includes('about') || lowerPrompt.includes('skill') || lowerPrompt.includes('experience') || lowerPrompt.includes('education')) {
-        text = "I'm a Frontend Developer and UI/UX Designer with skills in React, TypeScript, Next.js, TailwindCSS, and various UI frameworks. I'm currently a B.Tech student in Computer Science at IIIT Manipur, based in Hyderabad. Click below to learn more about me.";
-        actions.push({ type: 'navigate', target: 'about', label: 'About Me' });
-      }
-      else if (lowerPrompt.includes('anonymous') || lowerPrompt.includes('chat')) {
-        text = "My Anonymous Chatting app is built with React and includes AI assistant integration. You can check it out live or view the code on GitHub using the button below.";
-        actions.push({ type: 'link', target: 'https://anon-chat-pi.vercel.app/', label: 'View Anonymous Chat' });
+      else if (lowerPrompt.includes('project') || lowerPrompt.includes('work') || lowerPrompt.includes('portfolio')) {
+        text = "Ooh, great question! 🚀 Sandeep has created some super cool projects! There's PopcornTV (a Netflix-style app), an AI chat app, and beautiful websites for clients. Each one shows off his amazing frontend skills! Want to see them? 👀";
+        actions.push({ type: 'navigate', target: 'projects', label: '🚀 See Projects' });
+        actions.push({ type: 'link', target: 'https://pop-corn-tv.vercel.app/browse', label: '🎬 PopcornTV' });
+      } 
+      else if (lowerPrompt.includes('skill') || lowerPrompt.includes('tech') || lowerPrompt.includes('technology')) {
+        text = "Sandeep's tech toolkit is pretty impressive! ⚡ He wields React, TypeScript, and Next.js like a pro, creates stunning designs with Figma, and crafts beautiful UIs with TailwindCSS. He's basically a frontend wizard! ✨🧙‍♂️";
+        actions.push({ type: 'navigate', target: 'skills', label: '💻 View Skills' });
+      } 
+      else if (lowerPrompt.includes('contact') || lowerPrompt.includes('hire') || lowerPrompt.includes('email')) {
+        text = "Want to reach out to Sandeep? Awesome! 📱 Drop him a line at sandeepnaikb0@gmail.com or send a WhatsApp to +91-9390730129. He's available for exciting projects and would love to hear from you! 💌";
+        actions.push({ type: 'navigate', target: 'contact', label: '📱 Contact Info' });
+      } 
+      else if (lowerPrompt.includes('location') || lowerPrompt.includes('where') || lowerPrompt.includes('based')) {
+        text = "Sandeep is currently in sunny Hyderabad, India! 🌞 But don't worry about location - he works with clients worldwide and loves connecting with people from everywhere! 🌎";
+      } 
+      else if (lowerPrompt.includes('education') || lowerPrompt.includes('study') || lowerPrompt.includes('degree')) {
+        text = "Sandeep is earning his B.Tech in Computer Science at IIIT Manipur! 🎓 He's combining his academic knowledge with hands-on projects to become an even more amazing developer! 📚✨";
+        actions.push({ type: 'navigate', target: 'about', label: '🎓 About Me' });
+      } 
+      else if (lowerPrompt.includes('hobby') || lowerPrompt.includes('free time') || lowerPrompt.includes('like to do')) {
+        text = "When Sandeep isn't coding amazing websites, he enjoys exploring new tech, designing UI concepts, and staying updated with the latest web development trends! 🚀 He's passionate about creating beautiful digital experiences! ✨";
+      } 
+      else if (lowerPrompt.includes('thanks') || lowerPrompt.includes('thank you')) {
+        text = "You're very welcome! 💖 It's been my pleasure chatting with you! If you need anything else, just ask - I'm here to help! ✨";
+      } 
+      else if (lowerPrompt.includes('bye') || lowerPrompt.includes('goodbye')) {
+        text = "Bye for now! 👋 Thanks for chatting! Hope to see you again soon. Feel free to reach out anytime you want to know more about Sandeep's work! ✨";
       }
       else if (lowerPrompt.includes('popcorn') || lowerPrompt.includes('tv') || lowerPrompt.includes('netflix')) {
-        text = "PopcornTV is a Netflix-inspired streaming platform built with Next.js and TypeScript. It allows users to browse movies, watch trailers, and save favorites to a personal list. Check it out using the button below.";
-        actions.push({ type: 'link', target: 'https://pop-corn-tv.vercel.app/browse', label: 'View PopcornTV' });
+        text = "PopcornTV is so cool! 🎬 It's a Netflix-inspired streaming platform built with Next.js and TypeScript. You can browse movies, watch trailers, and save your favorites! Want to check it out? 🍿";
+        actions.push({ type: 'link', target: 'https://pop-corn-tv.vercel.app/browse', label: '🍿 View PopcornTV' });
       }
-      else if (lowerPrompt.includes('pani') || lowerPrompt.includes('actor')) {
-        text = "The Pani.Mr portfolio is an actor showcase website I built using React and modern CSS. You can view it live using the button below.";
-        actions.push({ type: 'link', target: 'https://1st-client-project.vercel.app/', label: 'View Actor Portfolio' });
+      else if (lowerPrompt.includes('pani') || lowerPrompt.includes('actor') || lowerPrompt.includes('portfolio site')) {
+        text = "The actor portfolio for Pani.Mr is one of Sandeep's favorite projects! 🎭 It showcases the actor's work in a beautiful, modern design with smooth animations. Take a peek! ✨";
+        actions.push({ type: 'link', target: 'https://1st-client-project.vercel.app/', label: '🎭 Actor Portfolio' });
       }
-      else if (lowerPrompt.includes('lakshmi') || lowerPrompt.includes('insulation') || lowerPrompt.includes('business') || lowerPrompt.includes('sai')) {
-        text = "Shri Lakshmi Sai Insulation is a business website I developed featuring services, portfolio, and contact information for an insulation company. Check it out using the button below.";
-        actions.push({ type: 'link', target: 'https://https-github-com-mr-naik-011-shri-lakshmi-sai-insulation.vercel.app/', label: 'View Business Site' });
+      else if (lowerPrompt.includes('business') || lowerPrompt.includes('insulation') || lowerPrompt.includes('lakshmi')) {
+        text = "The Shri Lakshmi Sai Insulation website is a perfect example of Sandeep's business website skills! 🏢 It's professional, informative, and beautifully designed to showcase their services! 💼";
+        actions.push({ type: 'link', target: 'https://https-github-com-mr-naik-011-shri-lakshmi-sai-insulation.vercel.app/', label: '🏢 Business Site' });
       }
-      else if (lowerPrompt.includes('github') || lowerPrompt.includes('code')) {
-        text = "You can check out my projects on GitHub. I have repositories for all my major projects including Anonymous Chat, PopcornTV, and more.";
-        actions.push({ type: 'link', target: 'https://github.com/MrBanoth', label: 'Visit GitHub' });
+      else if (lowerPrompt.includes('github')) {
+        text = "Sandeep loves open source and shares his code on GitHub! 🚀 You can explore all his awesome projects there - from websites to apps and experiments! Check it out! 🌟";
+        actions.push({ type: 'link', target: 'https://github.com/MrBanoth', label: '💻 GitHub Profile' });
       }
-      else if (lowerPrompt.includes('linkedin') || lowerPrompt.includes('professional')) {
-        text = "You can view my professional profile on LinkedIn to see my experience, skills and education background.";
-        actions.push({ type: 'link', target: 'https://www.linkedin.com/in/sandeep-naik-1316712a9/', label: 'View LinkedIn' });
+      else if (lowerPrompt.includes('resume') || lowerPrompt.includes('cv')) {
+        text = "Sandeep's resume showcases his skills, education, and projects in a clean, professional format! 📝 You can find it in the About section - just a click away! 👌";
+        actions.push({ type: 'navigate', target: 'about', label: '📝 View Resume' });
+      }
+      // New handlers for common visitor questions
+      else if (lowerPrompt.includes('service') || lowerPrompt.includes('offer') || lowerPrompt.includes('provide')) {
+        text = "Sandeep offers amazing web development services! 🌐 He specializes in building responsive websites, web applications, and stunning UI/UX designs using modern technologies like React and Next.js! What kind of project are you thinking about? 💻";
+        actions.push({ type: 'navigate', target: 'contact', label: '💬 Discuss a Project' });
+      }
+      else if (lowerPrompt.includes('cost') || lowerPrompt.includes('price') || lowerPrompt.includes('charge') || lowerPrompt.includes('fee')) {
+        text = "Great question about pricing! 💰 Sandeep's rates depend on your specific project needs and scope. He offers competitive pricing and focuses on delivering high-quality work that brings real value! Reach out for a personalized quote! 📝";
+        actions.push({ type: 'navigate', target: 'contact', label: '💸 Get a Quote' });
+      }
+      else if (lowerPrompt.includes('time') || lowerPrompt.includes('long') || lowerPrompt.includes('timeline') || lowerPrompt.includes('deadline')) {
+        text = "Wondering about timelines? ⏰ Most of Sandeep's projects take around 2-4 weeks from start to finish, depending on complexity and scope! He's known for delivering quality work on schedule! 📅 Have a specific deadline in mind? 🙋‍♂️";
+        actions.push({ type: 'navigate', target: 'contact', label: '📅 Discuss Timeline' });
+      }
+      else if (lowerPrompt.includes('process') || lowerPrompt.includes('workflow') || lowerPrompt.includes('approach')) {
+        text = "Sandeep follows a thoughtful development process! 📝 First, he'll understand your requirements, then create designs for your approval, followed by development, testing, and finally deployment! He keeps you in the loop every step of the way! 💡";
+      }
+      else if (lowerPrompt.includes('different') || lowerPrompt.includes('special') || lowerPrompt.includes('unique') || lowerPrompt.includes('stand out')) {
+        text = "What makes Sandeep special? ✨ His combination of technical skills AND design expertise means you get both beautiful AND functional websites! Plus, he's super responsive, detail-oriented, and passionate about creating the perfect solution for each client! 👏";
+      }
+      else if (lowerPrompt.includes('remote') || lowerPrompt.includes('online') || lowerPrompt.includes('distance')) {
+        text = "Good news! 🎉 Sandeep works remotely with clients from all around the world! With tools like Zoom, Slack, and email, distance is never an issue. He maintains clear communication throughout your project, no matter where you're located! 🌎";
+      }
+      else if (lowerPrompt.includes('experience') || lowerPrompt.includes('how long') || lowerPrompt.includes('years')) {
+        text = "Sandeep has over 2 years of experience building websites and web applications! 💻 During this time, he's worked on a variety of projects from streaming platforms to business websites, continuously improving his skills along the way! 📈";
+        actions.push({ type: 'navigate', target: 'projects', label: '💼 See Experience' });
       }
       else if (lowerPrompt.includes('language') || lowerPrompt.includes('speak')) {
-        text = "I speak Hindi, Telugu, and English fluently.";
+        text = "Sandeep is fluent in English, Hindi, and Telugu! 🌎 This multilingual ability helps him communicate effectively with clients from various backgrounds. Which language are you most comfortable with? 😀";
       }
-      else if (lowerPrompt.includes('freelance') || lowerPrompt.includes('hire') || lowerPrompt.includes('available')) {
-        text = "Yes, I'm currently available for freelance work! I'd be happy to discuss your project requirements. Please reach out via email at sandeepnaikb0@gmail.com or WhatsApp at +91-9390730129.";
-        actions.push({ type: 'navigate', target: 'contact', label: 'Contact Me' });
+      else if (lowerPrompt.includes('responsive') || lowerPrompt.includes('mobile') || lowerPrompt.includes('device')) {
+        text = "Absolutely! 📱 Sandeep creates fully responsive websites that look amazing on all devices - from desktop to tablets to mobile phones! He believes great user experience shouldn't be limited to just one screen size! 💻✨";
       }
-      else if (lowerPrompt.includes('location') || lowerPrompt.includes('based') || lowerPrompt.includes('where')) {
-        text = "I'm currently based in Hyderabad, India.";
+      else if (lowerPrompt.includes('payment') || lowerPrompt.includes('pay')) {
+        text = "For payments, Sandeep offers flexible options including bank transfers and digital payments! 💳 He typically works with a 50% upfront deposit and the remaining 50% upon project completion. Need a different arrangement? Just ask! 🙋‍♂️";
+        actions.push({ type: 'navigate', target: 'contact', label: '💰 Payment Info' });
       }
       else {
         // For any other query, provide a general response

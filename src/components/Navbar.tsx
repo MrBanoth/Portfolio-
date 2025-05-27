@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-scroll';
-import { Menu, X, Github, Linkedin } from 'lucide-react';
+import { Menu, X } from 'lucide-react';
 import ChatDialog from './ChatDialog';
 
 interface NavbarProps {
@@ -185,14 +185,6 @@ const Navbar: React.FC<NavbarProps> = ({ scrolled }) => {
                 </button>
               </li>
             </ul>
-            <div className="absolute bottom-12 flex space-x-8 mt-12">
-              <a href="https://github.com/MrBanoth" target="_blank" rel="noopener noreferrer" className="text-neutral-300 hover:text-white transition-colors">
-                <Github size={22} />
-              </a>
-              <a href="https://www.linkedin.com/in/sandeep-naik-1316712a9/" target="_blank" rel="noopener noreferrer" className="text-neutral-300 hover:text-white transition-colors">
-                <Linkedin size={22} />
-              </a>
-            </div>
           </div>
         )}
       </div>

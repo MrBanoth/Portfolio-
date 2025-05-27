@@ -8,5 +8,6 @@
 
 // Your actual EmailJS configuration values
 export const EMAILJS_SERVICE_ID = 'service_5bf5eyk'; // Your actual service ID
-export const EMAILJS_TEMPLATE_ID = 'template_fx3vume'; // Your actual template ID from EmailJS dashboard
+export const EMAILJS_TEMPLATE_ID = 'template_fx3vume'; // Your main contact form template ID
+export const EMAILJS_AUTO_REPLY_TEMPLATE_ID = 'template_zqpb9z7'; // Auto-reply template ID
 export const EMAILJS_PUBLIC_KEY = 'jCyjLo_OEbS6LkpOj'; // Your actual public key from EmailJS dashboard
