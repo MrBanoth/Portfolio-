@@ -144,18 +144,20 @@ const Navbar: React.FC<NavbarProps> = ({ scrolled }) => {
           </div>
         </div>
 
-        {/* Mobile Navigation */}
-        {isOpen && (
-          <div 
-            className="md:hidden fixed inset-0 bg-black/98 z-40 flex flex-col justify-center items-center pt-20"
-            style={{
-              top: '64px',
-              height: 'calc(100vh - 64px)',
-              WebkitOverflowScrolling: 'touch',
-              overflowY: 'auto',
-              overscrollBehavior: 'contain'
-            }}
-          >
+        {/* Mobile Navigation - Slides from right with glassmorphism */}
+        <div 
+          className={`md:hidden fixed top-[64px] right-0 bottom-0 w-full z-40 flex flex-col justify-center items-center pt-20 transition-transform duration-300 ease-in-out ${isOpen ? 'translate-x-0' : 'translate-x-full'}`}
+          style={{
+            height: 'calc(100vh - 64px)',
+            WebkitOverflowScrolling: 'touch',
+            overflowY: 'auto',
+            overscrollBehavior: 'contain',
+            backgroundColor: 'rgba(0, 0, 0, 0.85)',
+            backdropFilter: 'blur(10px)',
+            WebkitBackdropFilter: 'blur(10px)',
+            borderLeft: '1px solid rgba(255, 255, 255, 0.1)'
+          }}
+        >
             <ul className="flex flex-col space-y-8 text-center w-full px-4">
               {navLinks.map((link) => (
                 <li key={link.name}>
@@ -186,7 +188,6 @@ const Navbar: React.FC<NavbarProps> = ({ scrolled }) => {
               </li>
             </ul>
           </div>
-        )}
       </div>
       
       {/* Chat Dialog */}
