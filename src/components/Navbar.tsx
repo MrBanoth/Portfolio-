@@ -91,7 +91,7 @@ const Navbar: React.FC<NavbarProps> = ({ scrolled }) => {
 
   return (
     <>
-      <div className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${scrolled ? 'py-2 bg-black/90 backdrop-blur-sm' : 'py-4 bg-black'}`}>
+      <div className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${scrolled ? 'py-2 bg-black/90 backdrop-blur-sm' : 'py-4 bg-black'}`} style={{ zIndex: 1000 }}>
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center">
             <Link
@@ -146,19 +146,20 @@ const Navbar: React.FC<NavbarProps> = ({ scrolled }) => {
 
         {/* Mobile Navigation - Slides from right with glassmorphism */}
         <div 
-          className={`md:hidden fixed top-[64px] right-0 bottom-0 w-full z-40 flex flex-col justify-center items-center pt-20 transition-transform duration-300 ease-in-out ${isOpen ? 'translate-x-0' : 'translate-x-full'}`}
+          className={`md:hidden fixed top-16 right-0 bottom-0 w-full z-40 flex flex-col items-center pt-6 transition-transform duration-300 ease-in-out ${isOpen ? 'translate-x-0' : 'translate-x-full'}`}
           style={{
             height: 'calc(100vh - 64px)',
             WebkitOverflowScrolling: 'touch',
             overflowY: 'auto',
             overscrollBehavior: 'contain',
-            backgroundColor: 'rgba(0, 0, 0, 0.85)',
+            backgroundColor: 'rgba(0, 0, 0, 0.95)',
             backdropFilter: 'blur(10px)',
             WebkitBackdropFilter: 'blur(10px)',
-            borderLeft: '1px solid rgba(255, 255, 255, 0.1)'
+            borderLeft: '1px solid rgba(255, 255, 255, 0.1)',
+            paddingTop: '2rem'
           }}
         >
-            <ul className="flex flex-col space-y-8 text-center w-full px-4">
+            <ul className="flex flex-col space-y-8 text-center w-full px-4 mt-6">
               {navLinks.map((link) => (
                 <li key={link.name}>
                   <Link
