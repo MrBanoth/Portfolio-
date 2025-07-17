@@ -17,6 +17,14 @@ interface Message {
   }[];
 }
 
+// Track rate limiting state
+const rateLimitInfo = {
+  lastRequestTime: 0,
+  requestCount: 0,
+  MAX_REQUESTS_PER_MINUTE: 10, // Adjust based on your needs
+  WINDOW_MS: 60000 // 1 minute
+};
+
 const ChatDialog = ({ isOpen, onClose }: ChatDialogProps) => {
   const [messages, setMessages] = useState<Message[]>([
     {
@@ -99,6 +107,20 @@ const ChatDialog = ({ isOpen, onClose }: ChatDialogProps) => {
   };
 
   const generateAIResponse = async (prompt: string): Promise<{ text: string; actions?: { type: 'navigate' | 'link'; target: string; label: string; }[] }> => {
+    // Check rate limit
+    const now = Date.now();
+    if (now - rateLimitInfo.lastRequestTime > rateLimitInfo.WINDOW_MS) {
+      // Reset counter if window has passed
+      rateLimitInfo.lastRequestTime = now;
+      rateLimitInfo.requestCount = 0;
+    }
+
+    if (rateLimitInfo.requestCount >= rateLimitInfo.MAX_REQUESTS_PER_MINUTE) {
+      throw new Error('Rate limit exceeded. Please try again in a moment.');
+    }
+
+    rateLimitInfo.requestCount++;
+
     try {
       // Try to use the Gemini API first
       try {
@@ -124,7 +146,7 @@ About Sandeep:
 📍 Based in Hyderabad, India
 🌍 Fluent in English, Hindi, Telugu
 💼 Actively freelancing - available for hire!
-📋 Experience: 2+ years building websites and web applications
+📋 Experience: 1+ years building websites and web applications
 
 Tech Skills (talk about these with excitement!):
 ✨ Frontend: React, Next.js, TypeScript, JavaScript, HTML5, CSS3
@@ -181,7 +203,21 @@ User question: ${prompt}`
         });
         
         if (!response.ok) {
-          throw new Error(`API request failed with status ${response.status}`);
+          const errorData = await response.json();
+          // Sanitize error data before logging
+          const sanitizedError = {
+            status: response.status,
+            message: errorData.error?.message || 'API request failed',
+            details: errorData.error?.details ? 'Error details available' : undefined
+          };
+          console.error('API Error:', sanitizedError);
+          
+          // Return user-friendly error messages
+          if (response.status === 429) {
+            throw new Error('Too many requests. Please try again later.');
+          } else {
+            throw new Error('An error occurred while processing your request. Please try again.');
+          }
         }
         
         const data = await response.json();
@@ -275,7 +311,7 @@ User question: ${prompt}`
           };
         }
       } catch (apiError) {
-        console.error('API error:', apiError);
+        console.error('API error:', apiError instanceof Error ? apiError.message : 'Unknown error');
         // Fall back to predefined responses if API fails
       }
       
