@@ -162,7 +162,7 @@ const Contact: React.FC = () => {
               <a href="https://github.com/MrBanoth" target="_blank" rel="noopener noreferrer" className="text-neutral-300 hover:text-white transition-colors">
                 <Github size={22} />
               </a>
-              <a href="https://www.linkedin.com/in/sandeep-naik-1316712a9/" target="_blank" rel="noopener noreferrer" className="text-neutral-300 hover:text-white transition-colors">
+              <a href="https://www.linkedin.com/in/banothsandeepnaik/" target="_blank" rel="noopener noreferrer" className="text-neutral-300 hover:text-white transition-colors">
                 <Linkedin size={22} />
               </a>
             </div>

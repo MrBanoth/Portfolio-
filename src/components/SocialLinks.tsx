@@ -19,7 +19,7 @@ const SocialLinks: React.FC<SocialLinksProps> = ({ className = '', iconSize = 20
         <Github size={iconSize} />
       </a>
       <a
-        href="https://www.linkedin.com/in/sandeep-naik-1316712a9/"
+        href="https://www.linkedin.com/in/banothsandeepnaik/"
         target="_blank"
         rel="noopener noreferrer"
         className="text-neutral-400 hover:text-white transition-colors"
@@ -34,13 +34,13 @@ const SocialLinks: React.FC<SocialLinksProps> = ({ className = '', iconSize = 20
       >
         <Mail size={iconSize} />
       </a>
-      <a
+      {/* <a
         href="#projects"
         className="text-neutral-400 hover:text-white transition-colors"
         aria-label="Portfolio"
       >
         <Globe size={iconSize} />
-      </a>
+      </a> */}
     </div>
   );
 };
