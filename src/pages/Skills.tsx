@@ -100,7 +100,7 @@ const Skills: React.FC = () => {
   ];
 
   return (
-    <section className="bg-black pt-6 pb-0 md:pt-8 md:pb-0 lg:pt-10 lg:pb-0 border-t border-neutral-900" id="skills">
+    <section className="bg-black pt-15 pb-0 md:pt-20 md:pb-0 lg:pt-24 lg:pb-0 border-t border-neutral-900" id="skills">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="max-w-3xl mb-2 md:mb-3">
           <h2 className="text-4xl font-bold mb-2">My Skills</h2>

@@ -37,10 +37,7 @@ const Home: React.FC = () => {
                   <div className="mt-2 text-sm sm:text-base text-neutral-500 font-normal flex items-center">
                     <span>⚡️</span>
                     <TypedText 
-                      text=" Frontend Developer / UI-UX Designer" 
-                      speed={70} 
-                      pauseBeforeDelete={1800} 
-                      pauseBeforeType={300} 
+                      text="Frontend Developer / UI-UX Designer" 
                       className="ml-1" 
                     />
                   </div>

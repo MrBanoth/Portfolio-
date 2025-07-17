@@ -106,7 +106,7 @@ const Contact: React.FC = () => {
     }
   };
   return (
-    <section className="bg-black pt-6 pb-0 md:pt-8 md:pb-0 lg:pt-10 lg:pb-0 border-t border-neutral-900" id="contact">
+    <section className="bg-black pt-15 pb-0 md:pt-20 md:pb-0 lg:pt-24 lg:pb-0 border-t border-neutral-900" id="contact">
       <div className="container mx-auto px-4 pt-0 pb-2 md:px-6 md:pt-0 md:pb-2 lg:px-8 lg:pt-0 lg:pb-4">
         <div className="max-w-3xl mb-4 md:mb-6">
           <h2 className="text-4xl font-bold mb-2 md:mb-4">Contact Me</h2>
